@@ -22,10 +22,10 @@ class StringValidator
             }
 
             if ($level < 0) {
-                return false;
+                return [false, 'unexpected closing bracket'];
             }
         }
 
-        return $level === 0;
+        return $level === 0 ? true : [false, "$level unclosed brackets"];
     }
 }
