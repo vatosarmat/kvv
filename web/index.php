@@ -57,7 +57,7 @@
 <main>
     <div id="php-task">
         <?php
-        $stringToValidate = htmlspecialchars($_GET['stringToValidate']);
+        $stringToValidate = isset($_GET['stringToValidate']) ? htmlspecialchars($_GET['stringToValidate']) : '';
         ?>
         <form action="" method="get">
             <label for="stringToValidate">String to validate:</label>
