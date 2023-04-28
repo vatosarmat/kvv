@@ -13,17 +13,19 @@ class StringValidator
 
     public function validateBrackets()
     {
-        $input = $this->str;
+        $level = 0;
+        foreach (mb_str_split($this->str) as $char) {
+            if ($char === '{') {
+                $level++;
+            } elseif ($char === '}') {
+                $level--;
+            }
 
-        //strip-out all valid {} pairs
-        $matches = [];
-        $noBrackets = '[^{}]*';
-        $anything = '.*';
-        while (preg_match("/$noBrackets\{($anything)\}$noBrackets/", $input, $matches)) {
-            $input = $matches[1];
+            if ($level < 0) {
+                return false;
+            }
         }
 
-        //check if still has { or }
-        return ! preg_match('/\{|\}/', $input);
+        return $level === 0;
     }
 }
